@@ -337,7 +337,7 @@ gits.txt
 
 现在它已经被删除了，然后我们用`git status`来查看git现阶段的状态。
 
-```
+```html
 xyc@xzalinux:~/work/notegit$ git status
 位于分支 master
 尚未暂存以备提交的变更：
@@ -349,4 +349,38 @@ xyc@xzalinux:~/work/notegit$ git status
 修改尚未加入提交（使用 "git add" 和/或 "git commit -a"）
 ```
 
-有没有发现很熟悉，其实删除本身就是对文件的一种修改
+有没有发现很熟悉，其实删除本身就是对文件的一种修改，此时我们可以放弃这种改动，也就是放弃删除这种改动，可以用到前面说到的`git checkout --filename `来撤回修改，也可以保存这种修改到缓存区准备提交版本，就能用到<font color=red>`git rm filename`</font>来从版本库删除这个文件，再`commit`提交这个文件。
+
+```
+xyc@xzalinux:~/work/notegit$ git status
+位于分支 master
+尚未暂存以备提交的变更：
+  （使用 "git add/rm <文件>..." 更新要提交的内容）
+  （使用 "git checkout -- <文件>..." 丢弃工作区的改动）
+
+	删除：     del.txt
+
+修改尚未加入提交（使用 "git add" 和/或 "git commit -a"）
+xyc@xzalinux:~/work/notegit$ git rm del.txt
+rm 'del.txt'
+xyc@xzalinux:~/work/notegit$ git status
+位于分支 master
+要提交的变更：
+  （使用 "git reset HEAD <文件>..." 以取消暂存）
+
+	删除：     del.txt
+
+xyc@xzalinux:~/work/notegit$ git commit -m "del del.txt"
+[master 3c1d068] del del.txt
+ 1 file changed, 2 deletions(-)
+ delete mode 100644 del.txt
+```
+
+关于删除后找回：
+
+如果还没add到缓存区，也就是还没有用`git rm filename`命令，那就可以直接使用`git checkout --filename `来撤回修改。
+
+如果已经add到了缓存区，可以使用`git reset HEAD filename`来把修改从缓存区移走。
+
+如果已经提交了，可以使用`git reset --hard HEAD^`来回退版本。
+
