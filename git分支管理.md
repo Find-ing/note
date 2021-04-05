@@ -249,7 +249,7 @@ To github.com:Find-ing/X_X.git
 现在就能push了
 
 ```
-xza@xzalinux:~/work/notegit$ git push
+xza@xzalinux:~/work/notegit$ git push给i他
 对象计数中: 3, 完成.
 Delta compression using up to 2 threads.
 压缩对象中: 100% (2/2), 完成.
@@ -268,3 +268,22 @@ To github.com:Find-ing/X_X.git
 <font color=red>`git branch --set-upstream branch-name origin/branch-name`</font>
 
 例如我现在换一台电脑，我刚刚上传了dev分支，我想把这个分支拷贝到本地mster分支上面，由于更新不更新分支内容，我就可以用到上述命令
+
+```
+86188@xza MINGW64 /d/Repository/git/X_X (master)
+$ git branch
+* master
+
+86188@xza MINGW64 /d/Repository/git/X_X (master)
+$ git checkout -b dev origin/dev
+Switched to a new branch 'dev'
+Branch 'dev' set up to track remote branch 'dev' from 'origin'.
+
+86188@xza MINGW64 /d/Repository/git/X_X (dev)
+$ git branch
+* dev
+  master
+
+```
+
+可以看到本地分支已经成功创建，这里不能直接在本地master分支用<font color=red>`git pull origin 远程分支名`</font>这样会都弄混的。
